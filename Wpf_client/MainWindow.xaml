@@ -1,0 +1,186 @@
+﻿<Window Name="MyWindow" x:Class="Wpf_client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_client"
+        mc:Ignorable="d"
+        Title="Translate" Height="350" Width="600" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="MyWindow_MouseLeftButtonDown" MouseLeftButtonUp="MyWindow_MouseLeftButtonUp" MouseMove="MyWindow_MouseMove" Cursor="ScrollAll" Loaded="MyWindow_Loaded" Closed="MyWindow_Closed">
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonTamplate" TargetType="{x:Type Button}">
+            <Grid>
+                <Ellipse Margin="0" StrokeThickness="2" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}"/>
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="AlternativButtonTemplate" TargetType="{x:Type Button}">
+            <Grid>
+                <Rectangle RadiusX="6" RadiusY="6" Margin="0" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" />
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}" x:Key="MainButton">
+            <Style.Setters>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="AliceBlue"/>
+                <Setter Property="BorderBrush" Value="#FF1035DA"/>
+                <Setter Property="Foreground" Value="#FF1035DA"/>
+                <Setter Property="FontFamily" Value="Baskerville Old Face"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Width" Value="250"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Template" Value="{StaticResource ButtonTamplate}"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:.1"
+                                                 Storyboard.TargetProperty="FontSize"
+                                                 To="20">
+                                </DoubleAnimation>
+                                <!--<ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Background.Color"
+                                            To="#FFA2DE7D">
+                                </ColorAnimation>-->
+                                <ColorAnimation Duration="0:0:.4" Storyboard.TargetProperty="Foreground.Color"
+                                            To="LightGreen">
+                                </ColorAnimation>
+                                <ColorAnimation Duration="0:0:.4" Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="LightGreen">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:.2"
+                                                 Storyboard.TargetProperty="FontSize">
+                                </DoubleAnimation>
+                                <!--<ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Background.Color">
+                                </ColorAnimation>-->
+                                <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Foreground.Color">
+                                </ColorAnimation>
+                                <ColorAnimation Duration="0:0:.4" Storyboard.TargetProperty="BorderBrush.Color">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Template" Value="{StaticResource ButtonTamplate}"/>
+                    <Setter Property="Background" Value="CadetBlue"/>
+                    <Setter Property="Foreground" Value="LightBlue"/>
+                    <Setter Property="BorderBrush" Value="LightBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Bookman Old Style"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="AliceBlue"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Constantia"/>
+            <Setter Property="Foreground" Value="#FF5620A4"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="BorderBrush" Value="#FF1035DA"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <!--<Setter Property="Clip" Value="{StaticResource clipGeometry}"/>-->
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}" x:Key="AnotherButton">
+                <Style.Setters>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                    <Setter Property="Template" Value="{StaticResource AlternativButtonTemplate}" />
+                    <Setter Property="BorderThickness" Value="4"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Width" Value="25"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="FontSize" Value="23"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="Copperplate Gothic"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style.Setters>
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="true">
+                        <Setter Property="Background" Value="Red"></Setter>
+                        <Setter Property="Template" Value="{StaticResource AlternativButtonTemplate}"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Trigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:.1"
+                                                 Storyboard.TargetProperty="FontSize" To="25">
+                                    </DoubleAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Background.Color"
+                                            To="Red">
+                                    </ColorAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Foreground.Color"
+                                            To="LightCyan">
+                                    </ColorAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="White">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:.2"
+                                                 Storyboard.TargetProperty="FontSize">
+                                    </DoubleAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Background.Color">
+                                    </ColorAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="Foreground.Color">
+                                    </ColorAnimation>
+                                    <ColorAnimation Duration="0:0:.3" Storyboard.TargetProperty="BorderBrush.Color">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="buttonLoading" Content="Loading" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource MainButton}" Click="Button_Click"/>
+        <Button x:Name="buttonCancel" Content="X" Grid.Column="1" Style="{StaticResource AnotherButton}" Click="Button_Click"/>
+        <TextBlock x:Name="textBlockStatus" Text="Element" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlockName" Foreground="Red" Text="Enter Name" Grid.Column="0" Margin="98,58,97,8"/>
+        <TextBlock x:Name="textBlockAge" Foreground="Red" Text="Enter Age" Grid.Column="1" Margin="107,59,106,7"/>
+        <TextBox x:Name="textBoxName" Grid.Row="1" TextChanged="Text_Changed"/>
+        <TextBox x:Name="textBoxAge" Grid.Column="1" Grid.Row="1" TextChanged="Text_Changed"/>
+    </Grid>
+</Window>
